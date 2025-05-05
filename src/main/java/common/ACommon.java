@@ -1,0 +1,49 @@
+package common;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import utils.DataParser;
+import utils.Waiters;
+import java.util.List;
+import java.util.function.Predicate;
+
+public abstract class ACommon {
+
+  protected WebDriver driver;
+
+  protected Waiters waiters;
+
+  protected DataParser dataParser;
+
+
+
+  public ACommon(WebDriver driver){
+    this.driver = driver;
+    this.waiters = new Waiters(driver);
+    this.dataParser = new DataParser(driver);
+  }
+
+  public WebElement f(By locator){
+    return driver.findElement(locator);
+  }
+
+  public List<WebElement> ff(By locator){
+
+    return driver.findElements(locator);
+  }
+
+  protected void clickItemInListByPredicate(By locator, Predicate<WebElement> predicate){
+    ff(locator).stream()
+        .filter(predicate)
+        .findAny().get()
+        .click();
+  }
+
+  protected void scrollToElement(WebElement element){
+    new Actions(driver)
+        .scrollToElement(element)
+        .perform();
+  }
+}

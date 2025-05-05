@@ -1,0 +1,89 @@
+package pages;
+
+import annatations.Path;
+import com.google.inject.name.Named;
+import jakarta.inject.Inject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.Waiters;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+// todo убрать тут аннотацию и весь класс в компоненты? Вызывать надо mainPage
+@Path("/catalog/courses")
+public  class MainPageSteps extends MainPage {
+
+  @Inject
+  public MainPageSteps(WebDriver driver) {
+    super(driver);
+  }
+
+  Waiters waiters;
+
+  // действия на странице
+  public void searchCourse(String text) {
+    //ввести название курса и ждать плитку
+    searchInCourseBar(text);
+    waiters.waitForCondition(ExpectedConditions.textToBePresentInElementLocated(courseCardInCatalog, text));
+}
+public String clickOnFirstCard(){
+    clickOnFirstCourseCard();
+  waiters.waitForCondition(ExpectedConditions.presenceOfElementLocated(CourseNameHeader));
+    return findElement(CourseNameHeader).getText();
+}
+  private void getAllCoursesData(){
+    getAllCourses();
+}
+  public void getAllPageHtml(){
+    try {
+      waiters.waitForCondition(ExpectedConditions.presenceOfElementLocated(popupButton));
+      clickOnButton(popupButton);
+    }
+    catch (Exception e) {
+      System.out.println("popup not found");
+    }
+    int catalogSize = 0;
+    while (true) {
+
+      try {
+        catalogSize=getAllCourses().size();
+        waiters.waitForCondition(ExpectedConditions.presenceOfElementLocated(button));
+
+        clickOnButton(button);
+
+        waiters.waitForCondition(ExpectedConditions.numberOfElementsToBeMoreThan(courseCardInCatalog,catalogSize));
+      } catch (Exception e) {
+        System.out.println("button not found");
+        System.out.println(catalogSize +" размер");
+        break;
+      }
+    }
+    String html = driver.getPageSource();
+    Document doc = Jsoup.parse(html);
+    System.out.println(doc);
+    System.out.println("ыыы");
+    //Elements allCoursesNode = doc.selectXpath("//div/section/div/div[a]/a[@href]");
+    Elements allCoursesNode = doc.select("div>section>div>div:has(a)>a[href]");
+    System.out.println(allCoursesNode);
+    System.out.println("ыыы");
+    //allCoursesNode.stream().filter(element -> element.hasAttr("href")).forEach(element -> element.selectXpath("//a/h6/div").text());
+    //List<String> courseNames = allCoursesNode.stream().map(element -> element.select("a > h6 > div").text()).toList();
+    allCoursesNode.select("a > h6 > div").stream().forEach(element -> System.out.println(element.text() +","));
+
+    //todo потом это открыть
+//    Map<String,String> courseData = allCoursesNode.stream()
+//        .filter(element -> element.select("a > div:last-child > div > div").text().contains("месяц"))
+//        .collect(Collectors.toMap(
+//        (element -> element.select("a > h6 > div").text()),
+//        (element -> element.select("a > div:last-child > div > div").text())));
+//    System.out.println(courseData);
+}
+}

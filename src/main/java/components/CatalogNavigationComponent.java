@@ -112,8 +112,7 @@ public class CatalogNavigationComponent extends AComponent {
         waiters.waitForCondition(ExpectedConditions.numberOfElementsToBeMoreThan(courseCardFromRoot, catalogSize));
 
       } catch (Exception e) {
-        System.out.println("show more button not found");
-        System.out.println(catalogSize + " размер");
+        System.out.println(catalogSize + " всего курсов в каталоге");
         break;
       }
     }

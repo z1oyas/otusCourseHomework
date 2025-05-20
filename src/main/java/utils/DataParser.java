@@ -3,12 +3,7 @@ package utils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -39,7 +34,7 @@ public class DataParser {
         Map.Entry::getKey,
         Map.Entry::getValue
     ));
-    System.out.println(formattedCourseData);
+    //System.out.println(formattedCourseData);
     return formattedCourseData;
   }
 
@@ -55,7 +50,7 @@ public class DataParser {
         .collect(Collectors.toMap(
             (x -> x.select("a > h6 > div").text()),
             (x -> x.select("a > div:last-child > div > div").text())));
-    System.out.println(courseData);
+    //System.out.println(courseData);
     return courseData;
   }
 
@@ -95,7 +90,6 @@ public class DataParser {
   }
 
   private Map<String,LocalDate> findAllEquals( Optional<LocalDate> dateEqual,Map<String,LocalDate> map){
-    // todo понять, почему вложенный стрим с мапой
     return dateEqual.map(date ->
            map.entrySet().stream()
            .filter(x -> x.getValue().equals(date))

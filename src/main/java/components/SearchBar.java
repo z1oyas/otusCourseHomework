@@ -22,6 +22,7 @@ public class SearchBar extends AComponent {
   WebElement searchButton;
 
   public CatalogNavigationComponent searchInCourseBar(String keys) {
+    searchCourseBar.click();
     searchCourseBar.sendKeys(keys);
     return new CatalogNavigationComponent(driver, baseUrl);
   }

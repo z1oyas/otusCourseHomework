@@ -17,7 +17,7 @@ public class GuiceComponentsModule extends AbstractModule {
 
 
   @Provides
-  @Singleton
+  //@Singleton
   public CatalogNavigationComponent getCatalogNavigationComponent(){
     return new CatalogNavigationComponent(driver, url);
   }

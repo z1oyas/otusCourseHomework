@@ -11,7 +11,7 @@ public class BannerPopup extends ACommon implements IPopup {
   @Inject
   public BannerPopup(WebDriver driver) {
     super(driver);
-    PageFactory.initElements(driver, this);
+    //PageFactory.initElements(driver, this);
   }
 
   @Override
@@ -31,7 +31,7 @@ public class BannerPopup extends ACommon implements IPopup {
       WebElement element = driver.findElement(bannerPopup);
       ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
-    catch (TimeoutException e){
+    catch (Exception e){
       System.out.println("Popup button not found in time — skipping click");
     }
   }

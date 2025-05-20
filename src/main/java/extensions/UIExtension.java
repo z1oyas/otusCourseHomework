@@ -13,19 +13,28 @@ import org.openqa.selenium.WebDriver;
 
 public class UIExtension implements BeforeEachCallback, AfterEachCallback {
   private Injector injector = null;
+  private static final ThreadLocal<Injector> injectorThreadLocal = new ThreadLocal<>();
 
   @Override
   public void afterEach(ExtensionContext context) {
+    Injector injector = injectorThreadLocal.get();
+    if (injector != null) {
     WebDriver driver = injector.getInstance(WebDriver.class);
     if (driver != null) driver.quit();
+    }
+    injectorThreadLocal.remove();
   }
 
   @Override
-  public void beforeEach(ExtensionContext context) throws Exception {
+  public void beforeEach(ExtensionContext context) {
     WebDriverFactory factory = new WebDriverFactory();
     WebDriver driver = factory.create();
     String baseUrl = factory.getBasePageUrl();
-    injector = Guice.createInjector(new GuicePagesModule(driver,baseUrl), new GuiceComponentsModule(driver, baseUrl));
+    Injector injector = Guice.createInjector(
+        new GuicePagesModule(driver, baseUrl),
+        new GuiceComponentsModule(driver, baseUrl)
+    );
+    injectorThreadLocal.set(injector);
     injector.injectMembers(context.getTestInstance().isPresent() ? context.getTestInstance().get() : null);
   }
 }

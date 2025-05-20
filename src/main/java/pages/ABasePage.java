@@ -55,8 +55,8 @@ public abstract class ABasePage extends ACommon {
 
   public void open(){
     driver.get(baseUrl + getPath());
+    driver.manage().window().maximize();
     waiters.waitElementShouldBePresent(body);
-
     popupButton = new Popup(driver);
     bannerPopup = new BannerPopup(driver);
 

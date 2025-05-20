@@ -2,10 +2,7 @@ package main;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import components.CatalogNavigationComponent;
-import components.CategoriesNavigationComponent;
-import components.CourseCategoriesComponent;
-import components.SearchBar;
+import components.*;
 import extensions.UIExtension;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.DisplayName;
@@ -23,8 +20,6 @@ import java.util.Map;
 
 @ExtendWith(UIExtension.class)
 public class ExampleTest {
-  @Inject
-  public WebDriver driver;
 
   @Inject
   public MainCoursePage mainCoursePage;
@@ -72,20 +67,19 @@ public class ExampleTest {
     }
   }
 
-  //todo не ищется кнопка 1я
+
   @Test
   @DisplayName("3. Get random courseCategory")
-  public void getRandomCourseCategory() {
+  public void getRandomCourseCategory() throws InterruptedException {
     //Шаг 1: Открыть главную страницу
     mainPage.open();
     //Шаг 2: В заголовке страницы открыть меню «Обучение» и выбрать случайную категорию курсов
-    categoryComponent.clickOnButton(By.xpath("//section/button"));
         categoryComponent.clickOnButton(categoryComponent.getLearningCategoryButton());
-    List<Object> category = categoryComponent.getRandomCategory();
-    //Шаг 3: Проверить, что открыт каталог курсов верной категории
-    categoryComponent.clickOnCourse((By) category.get(1));
+    CourseCategoriesComponent.CategoryData category = categoryComponent.getRandomCategory();
+    //Шаг 3: Проверить, что открыт каталог курсов верной категории`
+    categoryComponent.clickOnCourse(category.getLocator());
     WebElement checkedCategory = categoriesNavigationComponent.findActiveCategory();
     String categoryNameInList = categoriesNavigationComponent.getCourseCategoryName(checkedCategory);
-    categoriesNavigationComponent.assertCourseName(categoryNameInList,category.get(0).toString());
+    categoriesNavigationComponent.assertCourseName(categoryNameInList, category.getKey());
   }
 }

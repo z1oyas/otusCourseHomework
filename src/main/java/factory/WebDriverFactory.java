@@ -23,7 +23,7 @@ public class WebDriverFactory {
     throw new BrowserNotSupportedExeption(browserName);
   }
 
-  public  String  getBasePageUrl(){
+  public String getBasePageUrl() {
     if (url == null) {
       throw new IllegalStateException("System property 'base.url' is not set.");
     }

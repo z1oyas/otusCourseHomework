@@ -19,30 +19,29 @@ public abstract class ACommon {
   protected DataParser dataParser;
 
 
-
-  public ACommon(WebDriver driver){
+  public ACommon(WebDriver driver) {
     this.driver = driver;
     this.waiters = new Waiters(driver);
     this.dataParser = new DataParser(driver);
   }
 
-  public WebElement f(By locator){
+  public WebElement f(By locator) {
     return driver.findElement(locator);
   }
 
-  public List<WebElement> ff(By locator){
+  public List<WebElement> ff(By locator) {
 
     return driver.findElements(locator);
   }
 
-  protected void clickItemInListByPredicate(By locator, Predicate<WebElement> predicate){
+  protected void clickItemInListByPredicate(By locator, Predicate<WebElement> predicate) {
     ff(locator).stream()
         .filter(predicate)
         .findAny().get()
         .click();
   }
 
-  protected void scrollToElement(WebElement element){
+  protected void scrollToElement(WebElement element) {
     new Actions(driver)
         .scrollToElement(element)
         .perform();

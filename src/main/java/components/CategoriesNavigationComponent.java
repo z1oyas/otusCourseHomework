@@ -1,6 +1,7 @@
 package components;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import annatations.Component;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
@@ -10,15 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 
 @Component("xpath;//div/div[p[contains(text(),'Направление')]]/following-sibling::div")
 public class CategoriesNavigationComponent extends AComponent {
-  //  //
-  //  //
-  By CategoryBlock = By.xpath("//div/div[p[contains(text(),'Направление')]]/following-sibling::div");
+  By categoryBlock = By.xpath("//div/div[p[contains(text(),'Направление')]]/following-sibling::div");
 
-  By CategoryItemBlock = By.xpath("./div/div/div");
+  By categoryItemBlock = By.xpath("./div/div/div");
 
-  By CategoryName = By.xpath(".//label");
-
-  //By CategoryCheckBox = By.xpath(".//div/input[@type='checkbox']");
+  By categoryName = By.xpath(".//label");
 
   @Inject
   public CategoriesNavigationComponent(WebDriver driver, String baseUrl) {
@@ -27,9 +24,9 @@ public class CategoriesNavigationComponent extends AComponent {
   }
 
   public WebElement findActiveCategory() {
-    waiters.waitElementShouldBePresent(CategoryBlock);
+    waiters.waitElementShouldBePresent(categoryBlock);
 
-    WebElement myCourse = f(CategoryBlock).findElements(CategoryItemBlock)
+    WebElement myCourse = f(categoryBlock).findElements(categoryItemBlock)
                               .stream()
                               .filter(x -> x.findElement(By.tagName("input")).isSelected())
                               .findFirst()
@@ -37,20 +34,19 @@ public class CategoriesNavigationComponent extends AComponent {
     scrollToElement(myCourse);
     if (myCourse != null) {
       return myCourse;
-    }
-    else {
+    } else {
       return null;
     }
   }
 
-  public String getCourseCategoryName(WebElement element){
-   String text =  element.findElement(CategoryName).getText();
+  public String getCourseCategoryName(WebElement element) {
+    String text = element.findElement(categoryName).getText();
     System.out.println(text);
     return text;
   }
 
-  public void  assertCourseName(String text, String CourseCategory) {
-    assertThat(text).isEqualTo(CourseCategory);
+  public void assertCourseName(String text, String courseCategory) {
+    assertThat(text).isEqualTo(courseCategory);
   }
 
 }

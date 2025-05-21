@@ -3,9 +3,7 @@ package components.popups;
 import common.ACommon;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 public class Popup extends ACommon implements IPopup {
 
@@ -14,7 +12,6 @@ public class Popup extends ACommon implements IPopup {
   @Inject
   public Popup(WebDriver driver) {
     super(driver);
-    //PageFactory.initElements(driver, this);
   }
 
   @Override
@@ -23,17 +20,16 @@ public class Popup extends ACommon implements IPopup {
   }
 
   @Override
-  public void PopupShouldBeVisible() {
+  public void popupShouldBeVisible() {
     waiters.waitElementShouldBePresent(popupButton);
   }
 
   @Override
   public void clickOnButton() {
     try {
-      PopupShouldBeVisible();
+      popupShouldBeVisible();
       driver.findElement(popupButton).click();
-    }
-    catch (Exception e){
+    } catch (Exception e) {
       System.out.println("Popup button not found in time — skipping click");
     }
 

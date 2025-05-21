@@ -15,10 +15,11 @@ public class SearchBar extends AComponent {
     super(driver, baseUrl);
     PageFactory.initElements(driver, this);
   }
-  @FindBy(xpath= "//div/input[@type=\"search\"]")
+
+  @FindBy(xpath = "//div/input[@type=\"search\"]")
   WebElement searchCourseBar;
 
-  @FindBy(xpath= "//div/input[@type=\"search\"]/following-sibling::div")
+  @FindBy(xpath = "//div/input[@type=\"search\"]/following-sibling::div")
   WebElement searchButton;
 
   public CatalogNavigationComponent searchInCourseBar(String keys) {

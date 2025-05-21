@@ -10,10 +10,12 @@ import org.openqa.selenium.support.events.WebDriverListener;
 public class HighlightListener implements WebDriverListener {
 
   WebDriver driver;
+
   @Inject
   public HighlightListener(WebDriver driver) {
     this.driver = driver;
   }
+
   @Override
   public void beforeClick(WebElement element) {
     highlightElement(element);
@@ -28,8 +30,8 @@ public class HighlightListener implements WebDriverListener {
     try {
       ((JavascriptExecutor) driver)
           .executeScript("arguments[0].style.border='3px solid red'", element);
-    }
-    catch (Exception ignore) {
+    } catch (Exception ignore) {
+      //do nothing
     }
   }
 
@@ -37,8 +39,8 @@ public class HighlightListener implements WebDriverListener {
     try {
       ((JavascriptExecutor) driver)
           .executeScript("arguments[0].style.border=''", element);
-    }
-    catch (Exception ignore) {
+    } catch (Exception ignore) {
+      //do nothing
     }
   }
 }

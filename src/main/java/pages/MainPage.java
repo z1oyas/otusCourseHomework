@@ -7,14 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 @Path("")
-public class MainPage extends ABasePage{
+public class MainPage extends ABasePage {
 
-  By PageTitle = By.tagName("h1");
-  ////main//div/a[contains(text(),'Все')]/preceding-sibling::a
 
   @Inject
   public MainPage(WebDriver driver, String baseUrl) {
-    super(driver,baseUrl);
+    super(driver, baseUrl);
     PageFactory.initElements(driver, this);
   }
 

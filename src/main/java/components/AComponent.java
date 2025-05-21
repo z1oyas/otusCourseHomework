@@ -1,7 +1,5 @@
 package components;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 import annatations.Component;
 import common.ACommon;
 import jakarta.inject.Inject;
@@ -20,29 +18,24 @@ public abstract class AComponent extends ACommon {
     this.baseUrl = baseUrl;
 
     waiters.waitElementShouldBePresent(getComponentEntry());
-//    assertThat(waiters.waitElementShouldBePresent(getComponentEntry()))
-//        .as("")
-//        .isTrue();
   }
 
-//todo протестить с невалидным локатором
   public WebElement getComponent() {
     try {
       return driver.findElement(getComponentEntry());
-    }
-    catch (NullPointerException ignore){
+    } catch (Exception ignore) {
+      // do nothing
     }
     return null;
   }
 
-  private By getComponentEntry(){
+  private By getComponentEntry() {
     Component component = getClass().getAnnotation(Component.class);
-    if(component!=null){
+    if (component != null) {
       String[] locatorMethod = (component.value()).split(";");
-      if(locatorMethod[0].equals("css")){
+      if (locatorMethod[0].equals("css")) {
         return By.cssSelector(locatorMethod[1]);
-      }
-      else if(locatorMethod[0].equals("xpath")){
+      } else if (locatorMethod[0].equals("xpath")) {
         return By.xpath(locatorMethod[1]);
       }
     }

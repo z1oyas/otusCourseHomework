@@ -36,10 +36,10 @@ public class ExampleTest {
     mainCoursePage.open();
     //Шаг 2: Найти курс по имени (имя курса должно передаваться как данные в тесте)
     WebElement myCourse = searchBar
-        .searchInCourseBar("Java QA Engineer. Professional")
-        .findCourseInCatalog("Java QA Engineer. Professional");
+                              .searchInCourseBar("Java QA Engineer. Professional")
+                              .findCourseInCatalog("Java QA Engineer. Professional");
     //Кликнуть по плитке курса и проверить, что открыта страница верного курса
-        catalogComponent.clickOnCourse(myCourse)
+    catalogComponent.clickOnCourse(myCourse)
         .assertCourseName("Java QA Engineer. Professional");
   }
 
@@ -50,13 +50,13 @@ public class ExampleTest {
     mainCoursePage.open();
     // шаг 2: найти курсы, которые стартуют раньше и позже всех
     Map<String, LocalDate> extremumDateCoursesMap = catalogComponent
-        .findCoursesInCatalog()
-        .findExtremumDateCourse();
+                                                        .findCoursesInCatalog()
+                                                        .findExtremumDateCourse();
     // шаг 3: проверить, что на карточке самого раннего/позднего курсов отображается верное название курса и дата его начала
-    for(Map.Entry<String, LocalDate> entry : extremumDateCoursesMap.entrySet()) {
+    for (Map.Entry<String, LocalDate> entry : extremumDateCoursesMap.entrySet()) {
       WebElement course = catalogComponent.findCourseInCatalog(entry.getKey());
-      catalogComponent.assertCourseName(course,entry.getKey());
-      catalogComponent.assertCourseDate(course,entry.getValue());
+      catalogComponent.assertCourseName(course, entry.getKey());
+      catalogComponent.assertCourseDate(course, entry.getValue());
     }
   }
 
@@ -67,7 +67,7 @@ public class ExampleTest {
     //Шаг 1: Открыть главную страницу
     mainPage.open();
     //Шаг 2: В заголовке страницы открыть меню «Обучение» и выбрать случайную категорию курсов
-        categoryComponent.clickOnButton(categoryComponent.getLearningCategoryButton());
+    categoryComponent.clickOnButton(categoryComponent.getLearningCategoryButton());
     CourseCategoriesComponent.CategoryData category = categoryComponent.getRandomCategory();
     //Шаг 3: Проверить, что открыт каталог курсов верной категории`
     categoryComponent.clickOnCourse(category.getLocator());

@@ -10,15 +10,13 @@ public class GuiceComponentsModule extends AbstractModule {
   public WebDriver driver;
   public String url;
 
-  public GuiceComponentsModule(WebDriver driver,String url) {
+  public GuiceComponentsModule(WebDriver driver, String url) {
     this.driver = driver;
-    this.url =url;
+    this.url = url;
   }
 
-
   @Provides
-  //@Singleton
-  public CatalogNavigationComponent getCatalogNavigationComponent(){
+  public CatalogNavigationComponent getCatalogNavigationComponent() {
     return new CatalogNavigationComponent(driver, url);
   }
 }

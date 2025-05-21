@@ -81,13 +81,6 @@ public class CatalogNavigationComponent extends AComponent {
     }
   }
 
-//  private String findCourseStartDate(String date){
-//    List<WebElement> courseDates = driver.findElements(courseCardDataStart);
-//    By CourseStartDate = By.xpath("//section/div/div/div/p[contains(text(),'"+date+"')]");
-//    waiters.waitElementShouldBePresent(CourseNameHeader);
-//    return driver.findElement(CourseStartDate).getText();
-//  }
-
   public CatalogNavigationComponent findCoursesInCatalog() {
     Map<String, String> courseDataRaw = getCoursesMap();
     courseData = dataParser.formattingData(courseDataRaw);
@@ -98,7 +91,6 @@ public class CatalogNavigationComponent extends AComponent {
   public Map<String, LocalDate> findExtremumDateCourse() {
     Map<String, LocalDate> extremumDateCoursesMap = dataParser.LatestDataCourses(courseData);
     extremumDateCoursesMap.putAll(dataParser.EarliestDataCourses(courseData));
-    System.out.println(extremumDateCoursesMap);
     return extremumDateCoursesMap;
   }
 
@@ -132,24 +124,15 @@ public class CatalogNavigationComponent extends AComponent {
   }
 
     public CatalogNavigationComponent assertCourseDate(WebElement element, LocalDate expectedDate) {
-    String dataOnCard = element.findElement(By.xpath(".//div/div/div")).getText();
-      System.out.println(dataOnCard);
+    String dataOnCard = element.findElement(By.xpath(".//h6/following-sibling::div/div/div")).getText();
       dataOnCard = dataOnCard.substring(0,dataOnCard.indexOf("·")-1);
       Locale ru = new Locale("ru", "RU");
-      DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMMM yyyy", ru);
-      String fullDate = dataOnCard + " " + expectedDate.getYear(); // спарсить чтобы нормально в localDate
+      DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMMM, yyyy", ru);
+      String fullDate = dataOnCard;
       LocalDate dataOnCardForrmated = LocalDate.parse(fullDate, format);
-
       assertThat(dataOnCardForrmated.getDayOfMonth()).isEqualTo(expectedDate.getDayOfMonth());
       assertThat(dataOnCardForrmated.getMonth()).isEqualTo(expectedDate.getMonth());
       return this;
   }
-//  public CatalogNavigationComponent assertCourseDate(WebElement element, LocalDate dayMonthData) {
-//    Locale ru = new Locale("ru", "RU");
-//    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMMM", ru);
-//    String dayMonthDataString =dayMonthData.format(format);
-//    assertThat(getCourseStartDate(dayMonthDataString)).isEqualTo(dayMonthDataString);
-//    return this;
-//  }
 }
 

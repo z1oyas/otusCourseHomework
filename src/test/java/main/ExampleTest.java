@@ -1,21 +1,15 @@
 package main;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import components.*;
 import extensions.UIExtension;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.MainCoursePage;
 import pages.MainPage;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 @ExtendWith(UIExtension.class)
@@ -49,7 +43,6 @@ public class ExampleTest {
         .assertCourseName("Java QA Engineer. Professional");
   }
 
-  //todo доделать по дате
   @Test
   @DisplayName("2. Get earliest and latest courses from catalog")
   public void getEarliestAndLatestCourseTest() throws InterruptedException {
@@ -63,7 +56,7 @@ public class ExampleTest {
     for(Map.Entry<String, LocalDate> entry : extremumDateCoursesMap.entrySet()) {
       WebElement course = catalogComponent.findCourseInCatalog(entry.getKey());
       catalogComponent.assertCourseName(course,entry.getKey());
-      //catalogComponent.assertCourseDate(course,entry.getValue());
+      catalogComponent.assertCourseDate(course,entry.getValue());
     }
   }
 

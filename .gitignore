@@ -1,38 +1,43 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# IntelliJ IDEA
+.idea/
 *.iml
+*.iws
 *.ipr
+out/
+*.class
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Build output
+/target/
+/build/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Logs
+*.log
 
-### VS Code ###
-.vscode/
-
-### Mac OS ###
+# OS files
 .DS_Store
+Thumbs.db
+
+# Maven wrapper
+.mvn/
+!**/mvn/wrapper/**
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Test results
+allure-results/
+allure-report/
+
+# Temporary files
+*~
+*.swp
+*.bak
+
+# Node modules (if using frontend or reporting tools)
+node_modules/
+
+# System-specific
+.shelf/
+workspace.xml

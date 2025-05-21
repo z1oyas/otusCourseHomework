@@ -1,1 +1,3 @@
-Запуск mvn clean test
+Запуск:
+chcp 65001
+mvn clean test

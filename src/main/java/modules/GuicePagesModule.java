@@ -18,12 +18,6 @@ public class GuicePagesModule extends AbstractModule {
     return driver;
   }
 
-  //  @Provides
-  //  @Singleton
-  //  public MainPage getMainPage(){
-  //    return new MainPage(driver);
-  //  }
-
   @Provides
   public String provideMainPageUrl() {
     return url;

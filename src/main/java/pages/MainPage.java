@@ -11,8 +11,8 @@ public class MainPage extends ABasePage {
 
 
   @Inject
-  public MainPage(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public MainPage(ScenarScope scope) {
+    super(scope);
     PageFactory.initElements(driver, this);
   }
 

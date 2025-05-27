@@ -8,8 +8,11 @@ import org.openqa.selenium.support.events.EventFiringDecorator;
 import utils.HighlightListener;
 
 public class WebDriverFactory {
-  private String browserName = System.getProperty("browser");
-  private String url = System.getProperty("base.url");
+  //  private String browserName = System.getProperty("browser");
+  //  private String url = System.getProperty("base.url");
+
+  private String browserName = "chrome";
+  private String url = "https://otus.ru";
 
   public WebDriver create() {
     switch (browserName) {

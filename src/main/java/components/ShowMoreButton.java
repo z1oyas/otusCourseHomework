@@ -11,8 +11,8 @@ public class ShowMoreButton extends AComponent {
   private By button = By.xpath("//button[contains(text(),'Показать')]");
 
   @Inject
-  public ShowMoreButton(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public ShowMoreButton(ScenarScope scope) {
+    super(scope);
   }
 
   public void clickOnButton() {

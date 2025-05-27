@@ -13,8 +13,8 @@ public class SearchBar extends AComponent {
   private final ScenarScope scope;
 
   @Inject
-  public SearchBar(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public SearchBar(ScenarScope scope) {
+    super(scope);
     this.scope=scope;
     PageFactory.initElements(driver, this);
   }
@@ -28,6 +28,6 @@ public class SearchBar extends AComponent {
   public CatalogNavigationComponent searchInCourseBar(String keys) {
     searchCourseBar.click();
     searchCourseBar.sendKeys(keys);
-    return new CatalogNavigationComponent(scope, baseUrl);
+    return new CatalogNavigationComponent(scope);
   }
 }

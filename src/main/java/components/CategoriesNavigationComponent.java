@@ -19,8 +19,8 @@ public class CategoriesNavigationComponent extends AComponent {
   private By categoryName = By.xpath(".//label");
 
   @Inject
-  public CategoriesNavigationComponent(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public CategoriesNavigationComponent(ScenarScope scope) {
+    super(scope);
     PageFactory.initElements(driver, this);
   }
 

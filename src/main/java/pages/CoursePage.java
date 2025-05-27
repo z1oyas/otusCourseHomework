@@ -15,8 +15,8 @@ public class CoursePage extends ABasePage {
   private By courseNameHeader = By.tagName("h1");
 
   @Inject
-  public CoursePage(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public CoursePage(ScenarScope scope) {
+    super(scope);
     PageFactory.initElements(driver, this);
   }
 

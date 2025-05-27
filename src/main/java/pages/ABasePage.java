@@ -35,10 +35,10 @@ public abstract class ABasePage extends ACommon {
   }
 
   @Inject
-  public ABasePage(ScenarScope scope, String baseUrl) {
+  public ABasePage(ScenarScope scope) {
     super(scope);
     this.scope = scope;
-    this.baseUrl = baseUrl;
+    this.baseUrl = scope.getBaseUrl();
   }
 
   private String getPath() {

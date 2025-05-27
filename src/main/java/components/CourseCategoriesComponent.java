@@ -22,8 +22,8 @@ public class CourseCategoriesComponent extends AComponent {
   private final ScenarScope scope;
 
   @Inject
-  public CourseCategoriesComponent(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public CourseCategoriesComponent(ScenarScope scope) {
+    super(scope);
     this.scope = scope;
     PageFactory.initElements(driver, this);
   }
@@ -54,7 +54,7 @@ public class CourseCategoriesComponent extends AComponent {
     category.getText();
     waiters.waitElementShouldBeVisible(category);
     category.click();
-    return new MainCoursePage(scope, baseUrl);
+    return new MainCoursePage(scope);
   }
 
 

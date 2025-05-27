@@ -14,9 +14,9 @@ public abstract class AComponent extends ACommon {
   protected String baseUrl;
 
   @Inject
-  public AComponent(ScenarScope scope, String baseUrl) {
+  public AComponent(ScenarScope scope) {
     super(scope);
-    this.baseUrl = baseUrl;
+    this.baseUrl = scope.getBaseUrl();
 
     waiters.waitElementShouldBePresent(getComponentEntry());
   }

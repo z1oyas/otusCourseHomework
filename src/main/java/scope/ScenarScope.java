@@ -1,5 +1,6 @@
 package scope;
 
+import com.google.inject.Provides;
 import factory.WebDriverFactory;
 import io.cucumber.guice.ScenarioScoped;
 import org.openqa.selenium.WebDriver;
@@ -8,10 +9,17 @@ import java.util.HashMap;
 @ScenarioScoped
 public class ScenarScope {
 
-  private WebDriver driver = new WebDriverFactory().create();
+  WebDriverFactory factory = new WebDriverFactory();
+
+  private WebDriver driver = factory.create();
+  private String baseUrl = factory.getBasePageUrl();
 
   public WebDriver getDriver() {
     return this.driver;
+  }
+
+  public String getBaseUrl() {
+    return this.baseUrl;
   }
 
   private HashMap<String, Object> storage = new HashMap<>();

@@ -27,11 +27,11 @@ public class CatalogNavigationComponent extends AComponent {
   private final ScenarScope scope;
 
   @Inject
-  public CatalogNavigationComponent(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public CatalogNavigationComponent(ScenarScope scope) {
+    super(scope);
     this.scope = scope;
     PageFactory.initElements(scope.getDriver(), this);
-    button = new ShowMoreButton(scope, baseUrl);
+    button = new ShowMoreButton(scope);
   }
 
   @FindBy(xpath = "//parent::h1/parent::div//following-sibling::div/div[a]")
@@ -45,7 +45,7 @@ public class CatalogNavigationComponent extends AComponent {
 
   public CoursePage clickOnCourse(WebElement targetCourse) {
     targetCourse.findElement(By.tagName("h6")).click();
-    return new CoursePage(scope, baseUrl);
+    return new CoursePage(scope);
   }
 
   public WebElement findCourseInCatalog(String courseName) {
@@ -99,7 +99,7 @@ public class CatalogNavigationComponent extends AComponent {
   public CoursePage clickOnEveryCourse(Map.Entry<String, LocalDate> entry) {
     By locator = By.xpath(".//a[@href]/h6/div[contains(text(),'" + entry.getKey() + "')]");
     clickItemInListByPredicate(locator, x -> x.getText().equals(entry.getKey()));
-    return new CoursePage(scope, baseUrl);
+    return new CoursePage(scope);
   }
 
   public CatalogNavigationComponent assertCourseName(WebElement element, String text) {

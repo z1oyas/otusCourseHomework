@@ -12,8 +12,8 @@ import scope.ScenarScope;
 public class MainCoursePage extends ABasePage {
 
   @Inject
-  public MainCoursePage(ScenarScope scope, String baseUrl) {
-    super(scope, baseUrl);
+  public MainCoursePage(ScenarScope scope) {
+    super(scope);
     PageFactory.initElements(driver, this);
   }
 

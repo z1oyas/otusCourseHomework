@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import scope.ScenarScope;
 import utils.DataParser;
 import utils.Waiters;
 import java.util.List;
@@ -19,9 +20,9 @@ public abstract class ACommon {
   protected DataParser dataParser;
 
 
-  public ACommon(WebDriver driver) {
-    this.driver = driver;
-    this.waiters = new Waiters(driver);
+  public ACommon(ScenarScope scope) {
+    this.driver = scope.getDriver();
+    this.waiters = new Waiters(scope);
     this.dataParser = new DataParser(driver);
   }
 

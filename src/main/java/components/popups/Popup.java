@@ -4,14 +4,15 @@ import common.ACommon;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import scope.ScenarScope;
 
 public class Popup extends ACommon implements IPopup {
 
   private By popupButton = By.xpath("//div/div/button/div[contains(text(),'OK')]");
 
   @Inject
-  public Popup(WebDriver driver) {
-    super(driver);
+  public Popup(ScenarScope scope) {
+    super(scope);
   }
 
   @Override

@@ -6,6 +6,7 @@ import jakarta.inject.Inject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import scope.ScenarScope;
 
 public abstract class AComponent extends ACommon {
 
@@ -13,8 +14,8 @@ public abstract class AComponent extends ACommon {
   protected String baseUrl;
 
   @Inject
-  public AComponent(WebDriver driver, String baseUrl) {
-    super(driver);
+  public AComponent(ScenarScope scope, String baseUrl) {
+    super(scope);
     this.baseUrl = baseUrl;
 
     waiters.waitElementShouldBePresent(getComponentEntry());

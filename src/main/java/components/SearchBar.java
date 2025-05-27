@@ -6,13 +6,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import scope.ScenarScope;
 
 @Component("xpath;//div/input[@type=\"search\"]")
 public class SearchBar extends AComponent {
+  private final ScenarScope scope;
 
   @Inject
-  public SearchBar(WebDriver driver, String baseUrl) {
-    super(driver, baseUrl);
+  public SearchBar(ScenarScope scope, String baseUrl) {
+    super(scope, baseUrl);
+    this.scope=scope;
     PageFactory.initElements(driver, this);
   }
 
@@ -25,6 +28,6 @@ public class SearchBar extends AComponent {
   public CatalogNavigationComponent searchInCourseBar(String keys) {
     searchCourseBar.click();
     searchCourseBar.sendKeys(keys);
-    return new CatalogNavigationComponent(driver, baseUrl);
+    return new CatalogNavigationComponent(scope, baseUrl);
   }
 }

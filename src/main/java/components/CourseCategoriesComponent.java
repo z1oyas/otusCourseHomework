@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainCoursePage;
+import scope.ScenarScope;
 import java.util.List;
 
 @Component("xpath;//nav")
@@ -18,10 +19,12 @@ public class CourseCategoriesComponent extends AComponent {
 
   private String learningCategoryChooseButton = "//div/div[p[contains(text(),'Все курсы')]]/div/a";
 
+  private final ScenarScope scope;
 
   @Inject
-  public CourseCategoriesComponent(WebDriver driver, String baseUrl) {
-    super(driver, baseUrl);
+  public CourseCategoriesComponent(ScenarScope scope, String baseUrl) {
+    super(scope, baseUrl);
+    this.scope = scope;
     PageFactory.initElements(driver, this);
   }
 
@@ -51,7 +54,7 @@ public class CourseCategoriesComponent extends AComponent {
     category.getText();
     waiters.waitElementShouldBeVisible(category);
     category.click();
-    return new MainCoursePage(driver, baseUrl);
+    return new MainCoursePage(scope, baseUrl);
   }
 
 

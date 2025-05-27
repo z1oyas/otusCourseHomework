@@ -6,13 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import scope.ScenarScope;
 
 @Path("/catalog/courses")
 public class MainCoursePage extends ABasePage {
 
   @Inject
-  public MainCoursePage(WebDriver driver, String baseUrl) {
-    super(driver, baseUrl);
+  public MainCoursePage(ScenarScope scope, String baseUrl) {
+    super(scope, baseUrl);
     PageFactory.initElements(driver, this);
   }
 

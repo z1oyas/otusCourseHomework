@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import scope.ScenarScope;
 
 @Path("/lessons/")
 public class CoursePage extends ABasePage {
@@ -14,8 +15,8 @@ public class CoursePage extends ABasePage {
   private By courseNameHeader = By.tagName("h1");
 
   @Inject
-  public CoursePage(WebDriver driver, String baseUrl) {
-    super(driver, baseUrl);
+  public CoursePage(ScenarScope scope, String baseUrl) {
+    super(scope, baseUrl);
     PageFactory.initElements(driver, this);
   }
 

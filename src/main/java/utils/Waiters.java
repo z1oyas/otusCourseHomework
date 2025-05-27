@@ -7,14 +7,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import scope.ScenarScope;
 import java.time.Duration;
 
 public class Waiters {
   private WebDriver driver;
   private int waitersTimeout;
 
-  public Waiters(WebDriver driver) {
-    this.driver = driver;
+  public Waiters(ScenarScope scope) {
+    this.driver = scope.getDriver();
     try {
       this.waitersTimeout = Integer.parseInt(System.getProperty("timeout", "10"));
     } catch (NumberFormatException e) {

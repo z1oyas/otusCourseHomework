@@ -7,6 +7,7 @@ import components.popups.Popup;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import scope.ScenarScope;
 import java.lang.annotation.Annotation;
 
 
@@ -18,6 +19,8 @@ public abstract class ABasePage extends ACommon {
   protected Popup popupButton;
 
   protected BannerPopup bannerPopup;
+
+  private final ScenarScope scope;
 
   private <T extends Annotation> Annotation getAnnotationInstance(Class<T> annatation, boolean isException) {
     Class clazz = getClass();
@@ -32,8 +35,9 @@ public abstract class ABasePage extends ACommon {
   }
 
   @Inject
-  public ABasePage(WebDriver driver, String baseUrl) {
-    super(driver);
+  public ABasePage(ScenarScope scope, String baseUrl) {
+    super(scope);
+    this.scope = scope;
     this.baseUrl = baseUrl;
   }
 
@@ -46,8 +50,8 @@ public abstract class ABasePage extends ACommon {
     driver.get(baseUrl + getPath());
     driver.manage().window().maximize();
     waiters.waitElementShouldBePresent(body);
-    popupButton = new Popup(driver);
-    bannerPopup = new BannerPopup(driver);
+    popupButton = new Popup(scope);
+    bannerPopup = new BannerPopup(scope);
 
     popupButton.clickOnButton();
     bannerPopup.clickOnButton();

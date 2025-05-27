@@ -4,14 +4,15 @@ import annatations.Path;
 import jakarta.inject.Inject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import scope.ScenarScope;
 
 @Path("")
 public class MainPage extends ABasePage {
 
 
   @Inject
-  public MainPage(WebDriver driver, String baseUrl) {
-    super(driver, baseUrl);
+  public MainPage(ScenarScope scope, String baseUrl) {
+    super(scope, baseUrl);
     PageFactory.initElements(driver, this);
   }
 

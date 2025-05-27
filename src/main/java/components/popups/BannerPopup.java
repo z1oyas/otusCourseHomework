@@ -1,15 +1,17 @@
 package components.popups;
 
 import common.ACommon;
+import io.cucumber.guice.ScenarioScoped;
 import jakarta.inject.Inject;
 import org.openqa.selenium.*;
+import scope.ScenarScope;
 
 public class BannerPopup extends ACommon implements IPopup {
   private By bannerPopup = By.xpath("//div[@class='sticky-banner__close js-sticky-banner-close']");
 
   @Inject
-  public BannerPopup(WebDriver driver) {
-    super(driver);
+  public BannerPopup(ScenarScope scope) {
+    super(scope);
   }
 
   @Override

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.CoursePage;
+import scope.ScenarScope;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -23,11 +24,14 @@ public class CatalogNavigationComponent extends AComponent {
 
   protected Map<String, LocalDate> courseData;
 
+  private final ScenarScope scope;
+
   @Inject
-  public CatalogNavigationComponent(WebDriver driver, String baseUrl) {
-    super(driver, baseUrl);
-    PageFactory.initElements(driver, this);
-    button = new ShowMoreButton(driver, baseUrl);
+  public CatalogNavigationComponent(ScenarScope scope, String baseUrl) {
+    super(scope, baseUrl);
+    this.scope = scope;
+    PageFactory.initElements(scope.getDriver(), this);
+    button = new ShowMoreButton(scope, baseUrl);
   }
 
   @FindBy(xpath = "//parent::h1/parent::div//following-sibling::div/div[a]")
@@ -41,7 +45,7 @@ public class CatalogNavigationComponent extends AComponent {
 
   public CoursePage clickOnCourse(WebElement targetCourse) {
     targetCourse.findElement(By.tagName("h6")).click();
-    return new CoursePage(driver, baseUrl);
+    return new CoursePage(scope, baseUrl);
   }
 
   public WebElement findCourseInCatalog(String courseName) {
@@ -95,7 +99,7 @@ public class CatalogNavigationComponent extends AComponent {
   public CoursePage clickOnEveryCourse(Map.Entry<String, LocalDate> entry) {
     By locator = By.xpath(".//a[@href]/h6/div[contains(text(),'" + entry.getKey() + "')]");
     clickItemInListByPredicate(locator, x -> x.getText().equals(entry.getKey()));
-    return new CoursePage(driver, baseUrl);
+    return new CoursePage(scope, baseUrl);
   }
 
   public CatalogNavigationComponent assertCourseName(WebElement element, String text) {

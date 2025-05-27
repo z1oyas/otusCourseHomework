@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import scope.ScenarScope;
 
 @Component("xpath;//div/div[p[contains(text(),'Направление')]]/following-sibling::div")
 public class CategoriesNavigationComponent extends AComponent {
@@ -18,8 +19,8 @@ public class CategoriesNavigationComponent extends AComponent {
   private By categoryName = By.xpath(".//label");
 
   @Inject
-  public CategoriesNavigationComponent(WebDriver driver, String baseUrl) {
-    super(driver, baseUrl);
+  public CategoriesNavigationComponent(ScenarScope scope, String baseUrl) {
+    super(scope, baseUrl);
     PageFactory.initElements(driver, this);
   }
 

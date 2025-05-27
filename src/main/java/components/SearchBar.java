@@ -17,10 +17,10 @@ public class SearchBar extends AComponent {
   }
 
   @FindBy(xpath = "//div/input[@type=\"search\"]")
-  WebElement searchCourseBar;
+  private WebElement searchCourseBar;
 
   @FindBy(xpath = "//div/input[@type=\"search\"]/following-sibling::div")
-  WebElement searchButton;
+  private WebElement searchButton;
 
   public CatalogNavigationComponent searchInCourseBar(String keys) {
     searchCourseBar.click();

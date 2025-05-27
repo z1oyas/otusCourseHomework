@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 @Path("/lessons/")
 public class CoursePage extends ABasePage {
 
-  By courseNameHeader = By.tagName("h1");
+  private By courseNameHeader = By.tagName("h1");
 
   @Inject
   public CoursePage(WebDriver driver, String baseUrl) {

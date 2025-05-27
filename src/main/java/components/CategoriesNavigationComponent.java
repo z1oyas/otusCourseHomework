@@ -11,11 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 
 @Component("xpath;//div/div[p[contains(text(),'Направление')]]/following-sibling::div")
 public class CategoriesNavigationComponent extends AComponent {
-  By categoryBlock = By.xpath("//div/div[p[contains(text(),'Направление')]]/following-sibling::div");
+  private By categoryBlock = By.xpath("//div/div[p[contains(text(),'Направление')]]/following-sibling::div");
 
-  By categoryItemBlock = By.xpath("./div/div/div");
+  private By categoryItemBlock = By.xpath("./div/div/div");
 
-  By categoryName = By.xpath(".//label");
+  private By categoryName = By.xpath(".//label");
 
   @Inject
   public CategoriesNavigationComponent(WebDriver driver, String baseUrl) {

@@ -12,11 +12,11 @@ import java.util.List;
 public class CourseCategoriesComponent extends AComponent {
 
 
-  By buttonMenu = By.xpath("//section/button");
+  private By buttonMenu = By.xpath("//section/button");
 
-  By learningCategoryButton = By.xpath("//span[contains(text(),'Обучение')]");
+  private By learningCategoryButton = By.xpath("//span[contains(text(),'Обучение')]");
 
-  String learningCategoryChooseButton = "//div/div[p[contains(text(),'Все курсы')]]/div/a";
+  private String learningCategoryChooseButton = "//div/div[p[contains(text(),'Все курсы')]]/div/a";
 
 
   @Inject

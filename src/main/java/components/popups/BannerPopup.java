@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import org.openqa.selenium.*;
 
 public class BannerPopup extends ACommon implements IPopup {
-  protected By bannerPopup = By.xpath("//div[@class='sticky-banner__close js-sticky-banner-close']");
+  private By bannerPopup = By.xpath("//div[@class='sticky-banner__close js-sticky-banner-close']");
 
   @Inject
   public BannerPopup(WebDriver driver) {

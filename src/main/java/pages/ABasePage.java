@@ -13,7 +13,7 @@ import java.lang.annotation.Annotation;
 public abstract class ABasePage extends ACommon {
 
   private String baseUrl;
-  public By body = By.tagName("body");
+  private By body = By.tagName("body");
 
   protected Popup popupButton;
 

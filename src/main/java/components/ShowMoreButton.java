@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 @Component("xpath;//button[contains(text(),'Показать')]")
 public class ShowMoreButton extends AComponent {
-  By button = By.xpath("//button[contains(text(),'Показать')]");
+  private By button = By.xpath("//button[contains(text(),'Показать')]");
 
   @Inject
   public ShowMoreButton(WebDriver driver, String baseUrl) {

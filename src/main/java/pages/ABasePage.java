@@ -4,9 +4,9 @@ import annatations.Path;
 import common.ACommon;
 import components.popups.BannerPopup;
 import components.popups.Popup;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import scope.ScenarScope;
 import java.lang.annotation.Annotation;
 
@@ -34,6 +34,7 @@ public abstract class ABasePage extends ACommon {
     return null;
   }
 
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "scope управляется DI, и его изменять извне не предполагается")
   @Inject
   public ABasePage(ScenarScope scope) {
     super(scope);

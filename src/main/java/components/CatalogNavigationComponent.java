@@ -3,9 +3,9 @@ package components;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import annatations.Component;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,6 +26,7 @@ public class CatalogNavigationComponent extends AComponent {
 
   private final ScenarScope scope;
 
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "scope управляется DI, и его изменять извне не предполагается")
   @Inject
   public CatalogNavigationComponent(ScenarScope scope) {
     super(scope);

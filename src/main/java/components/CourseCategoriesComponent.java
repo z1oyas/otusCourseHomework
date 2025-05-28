@@ -1,6 +1,7 @@
 package components;
 
 import annatations.Component;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.inject.Inject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
@@ -21,6 +22,7 @@ public class CourseCategoriesComponent extends AComponent {
 
   private final ScenarScope scope;
 
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "scope управляется DI, и его изменять извне не предполагается")
   @Inject
   public CourseCategoriesComponent(ScenarScope scope) {
     super(scope);

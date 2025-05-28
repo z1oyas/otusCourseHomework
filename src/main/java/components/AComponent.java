@@ -4,19 +4,16 @@ import annatations.Component;
 import common.ACommon;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import scope.ScenarScope;
 
 public abstract class AComponent extends ACommon {
 
   private WebElement component;
-  protected String baseUrl;
 
   @Inject
   public AComponent(ScenarScope scope) {
     super(scope);
-    this.baseUrl = scope.getBaseUrl();
 
     waiters.waitElementShouldBePresent(getComponentEntry());
   }

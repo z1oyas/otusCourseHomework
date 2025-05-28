@@ -1,8 +1,8 @@
 package components;
 
 import annatations.Component;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.inject.Inject;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,6 +12,7 @@ import scope.ScenarScope;
 public class SearchBar extends AComponent {
   private final ScenarScope scope;
 
+  @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "scope управляется DI, и его изменять извне не предполагается")
   @Inject
   public SearchBar(ScenarScope scope) {
     super(scope);

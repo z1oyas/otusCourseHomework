@@ -1,12 +1,8 @@
 package main.otus.steps;
 
-import components.CourseCategoriesComponent;
-import io.cucumber.java.ru.Затем;
-import io.cucumber.java.ru.Пусть;
 import io.cucumber.java.ru.Тогда;
 import jakarta.inject.Inject;
 import pages.CoursePage;
-import pages.MainPage;
 import scope.ScenarScope;
 
 public class CoursePageSteps {

@@ -1,6 +1,5 @@
 package scope;
 
-import com.google.inject.Provides;
 import factory.WebDriverFactory;
 import io.cucumber.guice.ScenarioScoped;
 import org.openqa.selenium.WebDriver;

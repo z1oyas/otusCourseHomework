@@ -1,7 +1,6 @@
 package components.popups;
 
 import common.ACommon;
-import io.cucumber.guice.ScenarioScoped;
 import jakarta.inject.Inject;
 import org.openqa.selenium.*;
 import scope.ScenarScope;

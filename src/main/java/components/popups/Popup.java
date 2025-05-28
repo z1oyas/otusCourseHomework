@@ -3,7 +3,6 @@ package components.popups;
 import common.ACommon;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import scope.ScenarScope;
 
 public class Popup extends ACommon implements IPopup {

@@ -3,7 +3,6 @@ package components;
 import annatations.Component;
 import jakarta.inject.Inject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import scope.ScenarScope;
 
 @Component("xpath;//button[contains(text(),'Показать')]")

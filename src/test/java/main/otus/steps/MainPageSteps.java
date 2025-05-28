@@ -1,12 +1,9 @@
 package main.otus.steps;
 
-import components.CatalogNavigationComponent;
 import components.CourseCategoriesComponent;
-import components.SearchBar;
 import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.Пусть;
 import jakarta.inject.Inject;
-import pages.MainCoursePage;
 import pages.MainPage;
 import scope.ScenarScope;
 

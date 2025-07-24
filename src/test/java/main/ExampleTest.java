@@ -6,12 +6,15 @@ import jakarta.inject.Inject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.WebElement;
 import pages.MainCoursePage;
 import pages.MainPage;
 import java.time.LocalDate;
 import java.util.Map;
 
+@Execution(ExecutionMode.CONCURRENT)
 @ExtendWith(UIExtension.class)
 public class ExampleTest {
 
@@ -41,6 +44,8 @@ public class ExampleTest {
     //Кликнуть по плитке курса и проверить, что открыта страница верного курса
     catalogComponent.clickOnCourse(myCourse)
         .assertCourseName("Java QA Engineer. Professional");
+
+    System.out.println("Thread: " + Thread.currentThread().getName());
   }
 
   @Test
@@ -58,6 +63,8 @@ public class ExampleTest {
       catalogComponent.assertCourseName(course, entry.getKey());
       catalogComponent.assertCourseDate(course, entry.getValue());
     }
+
+    System.out.println("Thread: " + Thread.currentThread().getName());
   }
 
 
@@ -74,5 +81,7 @@ public class ExampleTest {
     WebElement checkedCategory = categoriesNavigationComponent.findActiveCategory();
     String categoryNameInList = categoriesNavigationComponent.getCourseCategoryName(checkedCategory);
     categoriesNavigationComponent.assertCourseName(categoryNameInList, category.getKey());
+
+    System.out.println("Thread: " + Thread.currentThread().getName());
   }
 }

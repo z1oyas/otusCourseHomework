@@ -79,6 +79,11 @@
                     <systemPropertyVariables>
                         <browser>chrome</browser>
                         <base.url>https://otus.ru</base.url>
+                        <remote>false</remote>
+                        <selenoid.url>http://localhost/wd/hub</selenoid.url>
+                        <browser.version>127.0</browser.version>
+                        <enable.video>true</enable.video>
+                        <enable.vnc>true</enable.vnc>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

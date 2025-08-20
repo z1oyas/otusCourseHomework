@@ -1,11 +1,16 @@
 FROM maven:3.9.8-eclipse-temurin-17
 
 WORKDIR /app
+RUN mkdir -p /app/allure-results
 
 COPY pom.xml ./
+RUN mvn dependency:go-offline
 COPY src ./src
+VOLUME ["/app/allure-results"]
 
-ENTRYPOINT ["sh", "-c", "mvn clean test \
+ENTRYPOINT ["sh", "-c", "\
+  rm -rf /app/allure-results/* && \
+  mvn clean test \
   -Dbrowser=${BROWSER} \
   -Dbrowser.version=${BROWSER_VERSION} \
   -Dbase.url=${BASE_URL} \
@@ -14,4 +19,5 @@ ENTRYPOINT ["sh", "-c", "mvn clean test \
   -Denable.video=${ENABLE_VIDEO} \
   -Denable.vnc=${ENABLE_VNC} \
   -Dchat_id=${CHAT_ID} \
-  -Dbot_token=${BOT_TOKEN}"]
+  -Dbot_token=${BOT_TOKEN} \
+  -Dallure.results.directory=/app/allure-results"]

@@ -20,14 +20,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WebDriverFactory {
-  private String browserName = System.getProperty("browser");
-  private String url = System.getProperty("base.url");
-  private String remote = System.getProperty("remote");
-  private String browserVersion = System.getProperty("browser.version");
-  private boolean videoEnable = Boolean.parseBoolean(System.getProperty("enable.video"));
-  private boolean enableVNC = Boolean.parseBoolean(System.getProperty("enable.vnc"));
-  private String selenoidUrl = System.getProperty("selenoid.url");
-  private URL urlSelenoid;
+  //  <systemPropertyVariables>
+  //                        <browser>chrome</browser>
+  //                        <base.url>https://otus.ru</base.url>
+  //                        <remote>false</remote>
+  //                        <selenoid.url>http://localhost/wd/hub</selenoid.url>
+  //                        <browser.version>127.0</browser.version>
+  //                        <enable.video>true</enable.video>
+  //                        <enable.vnc>true</enable.vnc>
+  //                    </systemPropertyVariables>
+  private final String browserName = System.getProperty("browser", "chrome");
+  private final String url = System.getProperty("base.url", "https://otus.ru");
+  private final String remote = System.getProperty("remote", "false");
+  private final String browserVersion = System.getProperty("browser.version", "127.0");
+  private final boolean videoEnable = Boolean.parseBoolean(System.getProperty("enable.video", "false"));
+  private final boolean enableVNC = Boolean.parseBoolean(System.getProperty("enable.vnc", "true"));
+  private final String selenoidUrl = System.getProperty("selenoid.url", "http://localhost/wd/hub");
+  private final URL urlSelenoid;
 
   public WebDriverFactory() {
     URL tempUrl = null;

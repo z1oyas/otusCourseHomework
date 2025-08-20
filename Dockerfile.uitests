@@ -1,0 +1,17 @@
+FROM maven:3.9.8-eclipse-temurin-17
+
+WORKDIR /app
+
+COPY pom.xml ./
+COPY src ./src
+
+ENTRYPOINT ["sh", "-c", "mvn clean test \
+  -Dbrowser=${BROWSER} \
+  -Dbrowser.version=${BROWSER_VERSION} \
+  -Dbase.url=${BASE_URL} \
+  -Dremote=${REMOTE} \
+  -Dselenoid.url=${SELENOID_URL} \
+  -Denable.video=${ENABLE_VIDEO} \
+  -Denable.vnc=${ENABLE_VNC} \
+  -Dchat_id=${CHAT_ID} \
+  -Dbot_token=${BOT_TOKEN}"]

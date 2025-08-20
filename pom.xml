@@ -77,13 +77,20 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <browser>chrome</browser>
-                        <base.url>https://otus.ru</base.url>
-                        <remote>false</remote>
-                        <selenoid.url>http://localhost/wd/hub</selenoid.url>
-                        <browser.version>127.0</browser.version>
-                        <enable.video>true</enable.video>
-                        <enable.vnc>true</enable.vnc>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <browser>${browser}</browser>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <base.url>${base.url}</base.url>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <remote>${remote}</remote>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <selenoid.url>${selenoid.url}</selenoid.url>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <browser.version>${browser.version}</browser.version>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <enable.video>${enable.video}</enable.video>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <enable.vnc>${enable.vnc}</enable.vnc>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

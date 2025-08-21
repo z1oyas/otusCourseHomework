@@ -25,7 +25,7 @@ timeout(1200){
                 }
             }
             stage("Prepare Allure results") {
-                sh "rm -rf allure-results/*"
+                sh "mkdir -p allure-results"
             }
             stage("Running UI Automation") {
                 def status = sh(

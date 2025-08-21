@@ -9,7 +9,6 @@ COPY src ./src
 VOLUME ["/app/allure-results"]
 
 ENTRYPOINT ["sh", "-c", "\
-  rm -rf /app/allure-results/* && \
   mvn clean test \
   -Dbrowser=${BROWSER} \
   -Dbrowser.version=${BROWSER_VERSION} \

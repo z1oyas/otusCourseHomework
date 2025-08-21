@@ -24,6 +24,9 @@ timeout(1200){
                    sh "echo 'BOT_TOKEN=${botToken}' >> .env"
                 }
             }
+            stage("Prepare Allure results") {
+                sh "rm -rf allure-results/*"
+            }
             stage("Running UI Automation") {
                 def status = sh(
                         script: "docker run --rm --name=ui_tests --env-file envs/.env --network=host -v \$PWD/allure-results:/app/allure-results localhost:5005/ui_tests:latest",
@@ -32,6 +35,10 @@ timeout(1200){
                 if (status > 0) {
                     currentBuild.result = 'UNSTABLE'
                 }
+            }
+
+            stage("Check Allure results") {
+                sh "ls -la allure-results"
             }
 
             stage("Allure report publisher") {

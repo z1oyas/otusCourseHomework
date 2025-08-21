@@ -37,8 +37,9 @@ timeout(1200){
                 }
             }
 
-            stage("Check Allure results") {
-                sh "ls -la allure-results"
+            stage("Debug allure mount") {
+                sh "ls -la /home/jenkins/workspace/ui-test-runner/allure-results || true"
+                sh "ls -la allure-results || true"
             }
 
             stage("Allure report publisher") {
@@ -52,7 +53,7 @@ timeout(1200){
             }
 
             stage("Gets statistics from allure artifacts") {
-                def jsonLines = readFile ".allure-report/widget/summary.json"
+                def jsonLines = readFile ".allure-report/widgets/summary.json"
                 def slurped = new JsonSlurperClassic().parseText(jsonLines)
 
                 slurped.each{k, v ->

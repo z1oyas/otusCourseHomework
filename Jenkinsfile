@@ -7,7 +7,9 @@ timeout(1200){
         try {
             sh "mkdir -p envs"
 
-            def yamlConfig = readYaml text: $YAML_CONFIG
+            def yamlConfig = readYaml text: params.YAML_CONFIG
+            def chatId = params.chat_id
+            def botToken = params.bot_token
 
             stage("Create environment variables") {
                 dir("envs") {
@@ -18,8 +20,8 @@ timeout(1200){
                    sh "echo 'ENABLE_VIDEO=${yamlConfig['enable.video']}' >> .env"
                    sh "echo 'ENABLE_VNC=${yamlConfig['enable.vnc']}' >> .env"
                    sh "echo 'SELENOID_URL=${yamlConfig['selenoid.url']}' >> .env"
-                   sh "echo 'CHAT_ID=${chat_id}' >> .env"
-                   sh "echo 'BOT_TOKEN=${bot_token}' >> .env"
+                   sh "echo 'CHAT_ID=${chatId}' >> .env"
+                   sh "echo 'BOT_TOKEN=${botToken}' >> .env"
                 }
             }
             stage("Running UI Automation") {

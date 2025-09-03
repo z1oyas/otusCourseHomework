@@ -34,11 +34,11 @@ timeout(1200){
                     currentBuild.result = 'UNSTABLE'
                 }
             }
-
-            stage("Debug allure mount") {
-                sh "ls -la /home/jenkins/workspace/ui-test-runner/allure-results || true"
-                sh "ls -la allure-results || true"
-            }
+//
+//             stage("Debug allure mount") {
+//                 sh "ls -la /home/jenkins/workspace/ui-test-runner/allure-results || true"
+//                 sh "ls -la allure-results || true"
+//             }
 
             stage("Allure report publisher") {
                 allure([
@@ -72,11 +72,11 @@ timeout(1200){
 
                 def cleanDateStart = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStart)
                 def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
-
-                def duration = String.format("%d min, %d sec",
-                        durationSec / 60,
-                        durationSec % 60
-                    )
+//
+//                 def duration = String.format("%d min, %d sec",
+//                         durationSec / 60,
+//                         durationSec % 60
+//                     )
 
                 def message = """==== UI TESTS RESULT ====
             browser name: $BROWSER
@@ -92,7 +92,7 @@ timeout(1200){
 
             Start: $cleanDateStart
             Finish: $cleanDateStop
-            Duration: $duration"""
+            Duration: $durationSec"""
 
             withCredentials([string(credentialsId: 'chat_id', variable: 'chatId'),
                                  string(credentialsId: 'bot_token', variable: 'botToken')]) {

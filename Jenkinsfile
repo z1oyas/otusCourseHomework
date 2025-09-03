@@ -58,26 +58,28 @@ timeout(1200){
             }
 
             stage("Telegram notification") {
-            def BROWSER = yamlConfig['browser']
-            def REMOTE = yamlConfig['remote']
-            def BROWSER_VERSION = yamlConfig['browser.version']
+                def BROWSER = yamlConfig['browser']
+                def REMOTE = yamlConfig['remote']
+                def BROWSER_VERSION = yamlConfig['browser.version']
 
-            def dateUnixStart = slurped.time.start as long
-            def dateUnixStop = slurped.time.stop as long
-            def durationMillis = (slurped.time.duration as BigDecimal).longValue()
+                def dateUnixStart = slurped.time.start as long
+                def dateUnixStop = slurped.time.stop as long
 
-            Date dateObjStart = new Date(dateUnixStart)
-            Date dateObjStop = new Date(dateUnixStop)
 
-            def cleanDateStart = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStart)
-            def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
+                def durationSec = ((slurped.time.duration as BigDecimal).doubleValue()).round() as long
 
-            def duration = String.format("%d min, %d sec",
-                    (durationMillis / 1000) / 60,
-                    (durationMillis / 1000) % 60
-            )
+                Date dateObjStart = new Date(dateUnixStart)
+                Date dateObjStop = new Date(dateUnixStop)
 
-            def message = """==== UI TESTS RESULT ====
+                def cleanDateStart = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStart)
+                def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
+
+                def duration = String.format("%d min, %d sec",
+                    durationSec / 60,
+                    durationSec % 60
+                )
+
+                def message = """==== UI TESTS RESULT ====
             browser name: $BROWSER
             remote: $REMOTE
             browser version: $BROWSER_VERSION

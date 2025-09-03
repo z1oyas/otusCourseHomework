@@ -60,14 +60,13 @@ timeout(1200){
             stage("Telegram notification") {
                 def BROWSER = yamlConfig['browser']
                 def REMOTE = yamlConfig['remote']
-                def BROWSER_VERSION = yamlConfig['browser.version']
+               def BROWSER_VERSION = yamlConfig['browser_version']
 
                 def dateUnixStart = slurped.time.start as long
                 def dateUnixStop = slurped.time.stop as long
 
 
-                def durationSec = ((slurped.time.duration as BigDecimal).doubleValue()).round() as long
-
+                def durationSec = (slurped.time.duration as long) / 1000
                 Date dateObjStart = new Date(dateUnixStart)
                 Date dateObjStop = new Date(dateUnixStop)
 
@@ -75,9 +74,9 @@ timeout(1200){
                 def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
 
                 def duration = String.format("%d min, %d sec",
-                    durationSec / 60,
-                    durationSec % 60
-                )
+                        durationSec / 60,
+                        durationSec % 60
+                    )
 
                 def message = """==== UI TESTS RESULT ====
             browser name: $BROWSER

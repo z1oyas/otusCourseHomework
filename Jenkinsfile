@@ -59,19 +59,40 @@ timeout(1200){
             def BROWSER = yamlConfig['browser']
             def REMOTE = yamlConfig['remote']
             def BROWSER_VERSION = yamlConfig['browser.version']
-                def message = """==== UI TESTS RESULT ====
-                browser name: $BROWSER
-                remote: $REMOTE
-                browser version: $BROWSER_VERSION
-                Test Results:
-                Passed: ${slurped.statistic.passed}
-                Failed: ${slurped.statistic.failed}
-                Broken: ${slurped.statistic.broken}
-                Skipped: ${slurped.statistic.skipped}
-                Total: ${slurped.statistic.total}
-                Duration: ${slurped.time.duration}"""
 
-                withCredentials([string(credentialsId: 'chat_id', variable: 'chatId'), string(credentialsId: 'bot_token',variable: 'botToken')]){
+            def dateUnixStart = slurped.time.start as long
+            def dateUnixStop = slurped.time.stop as long
+            def durationMillis = slurped.time.duration as long
+
+            Date dateObjStart = new Date(dateUnixStart)
+            Date dateObjStop = new Date(dateUnixStop)
+
+            def cleanDateStart = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStart)
+            def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
+
+            def duration = String.format("%d min, %d sec",
+                    (durationMillis / 1000) / 60,
+                    (durationMillis / 1000) % 60
+            )
+
+            def message = """==== UI TESTS RESULT ====
+            browser name: $BROWSER
+            remote: $REMOTE
+            browser version: $BROWSER_VERSION
+
+            Test Results:
+            Passed: ${slurped.statistic.passed}
+            Failed: ${slurped.statistic.failed}
+            Broken: ${slurped.statistic.broken}
+            Skipped: ${slurped.statistic.skipped}
+            Total: ${slurped.statistic.total}
+
+            Start: $cleanDateStart
+            Finish: $cleanDateStop
+            Duration: $duration"""
+
+            withCredentials([string(credentialsId: 'chat_id', variable: 'chatId'),
+                                 string(credentialsId: 'bot_token', variable: 'botToken')]) {
                     sh """
                     curl -X POST \
                     -H 'Content-Type: application/json' \

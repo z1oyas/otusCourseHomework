@@ -66,15 +66,15 @@ timeout(1200){
                 def dateUnixStop = slurped.time.stop as long
 
 
-                def durationSec = ((slurped.time.duration as long) / 1000) as long
+                def duration = ((slurped.time.duration as long) / 1000) as long
                 Date dateObjStart = new Date(dateUnixStart)
                 Date dateObjStop = new Date(dateUnixStop)
 
                 def cleanDateStart = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStart)
                 def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
 //
-                def durationMin = (durationSec /60) as long
-                def durationSec = (durationSec %60) as long
+                def durationMin = (duration /60) as long
+                def durationSec = (duration %60) as long
 
                 def message = """==== UI TESTS RESULT ====
             browser name: $BROWSER

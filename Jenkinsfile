@@ -75,7 +75,7 @@ timeout(1200){
                     sh """
                     curl -X POST \
                     -H 'Content-Type: application/json' \
-                    -d '{"chat_id": "${chatId}", "text": "${messageContent}"}' \
+                    -d '{"chat_id": "${chatId}", "text": "${message}"}' \
                     "https://api.telegram.org/bot${botToken}/sendMessage"
                     """
                 }

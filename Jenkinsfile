@@ -64,7 +64,7 @@ timeout(1200){
 
             def dateUnixStart = slurped.time.start as long
             def dateUnixStop = slurped.time.stop as long
-            def durationMillis = slurped.time.duration as long
+            def durationMillis = (slurped.time.duration as BigDecimal).longValue()
 
             Date dateObjStart = new Date(dateUnixStart)
             Date dateObjStop = new Date(dateUnixStop)

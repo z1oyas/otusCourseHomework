@@ -73,10 +73,8 @@ timeout(1200){
                 def cleanDateStart = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStart)
                 def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
 //
-//                 def duration = String.format("%d min, %d sec",
-//                         durationSec / 60,
-//                         durationSec % 60
-//                     )
+                def durationMin = (durationSec /60) as long
+                def durationSec = (durationSec %60) as long
 
                 def message = """==== UI TESTS RESULT ====
             browser name: $BROWSER
@@ -92,7 +90,7 @@ timeout(1200){
 
             Start: $cleanDateStart
             Finish: $cleanDateStop
-            Duration: $durationSec"""
+            Duration: $durationMin min $durationSec sec"""
 
             withCredentials([string(credentialsId: 'chat_id', variable: 'chatId'),
                                  string(credentialsId: 'bot_token', variable: 'botToken')]) {

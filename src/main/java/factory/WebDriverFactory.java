@@ -30,12 +30,12 @@ public class WebDriverFactory {
   //                        <enable.vnc>true</enable.vnc>
   //                    </systemPropertyVariables>
   private final String browserName = System.getProperty("browser", "chrome");
-  private final String url = System.getProperty("base.url", "https://otus.ru");
+  private final String url = System.getProperty("base_url", "https://otus.ru");
   private final String remote = System.getProperty("remote", "false");
-  private final String browserVersion = System.getProperty("browser.version", "127.0");
-  private final boolean videoEnable = Boolean.parseBoolean(System.getProperty("enable.video", "false"));
-  private final boolean enableVNC = Boolean.parseBoolean(System.getProperty("enable.vnc", "true"));
-  private final String selenoidUrl = System.getProperty("selenoid.url", "http://localhost/wd/hub");
+  private final String browserVersion = System.getProperty("browser_version", "127.0");
+  private final boolean videoEnable = Boolean.parseBoolean(System.getProperty("enable_video", "false"));
+  private final boolean enableVNC = Boolean.parseBoolean(System.getProperty("enable_vnc", "true"));
+  private final String selenoidUrl = System.getProperty("selenoid_url", "http://localhost/wd/hub");
   private final URL urlSelenoid;
 
   public WebDriverFactory() {
@@ -56,6 +56,7 @@ public class WebDriverFactory {
         switch (browserName) {
           case "chrome": {
             ChromeOptions options = new ChromeOptions();
+            options.addArguments("--window-size=1920,1080");
             options.setCapability("timeouts", Map.of("implicit", 5000, "pageLoad", 180000, "script", 30000));
             options.setCapability("browserVersion", browserVersion);
             options.setCapability("selenoid:options", new HashMap<String, Object>() {{
@@ -101,8 +102,9 @@ public class WebDriverFactory {
         }
 
         RemoteWebDriver driver = new RemoteWebDriver(urlSelenoid, capabilities);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60)); // таймаут перехода по ссылке
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(100)); // таймаут перехода по ссылке
         HighlightListener listener = new HighlightListener(driver);
+        System.out.println(driver.getCapabilities());
         System.out.println("Session started: " + driver.getSessionId());
         return new EventFiringDecorator<>(listener).decorate(driver);
       }

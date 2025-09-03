@@ -16,7 +16,7 @@ public class Waiters {
   public Waiters(WebDriver driver) {
     this.driver = driver;
     try {
-      this.waitersTimeout = Integer.parseInt(System.getProperty("timeout", "10"));
+      this.waitersTimeout = Integer.parseInt(System.getProperty("timeout", "20"));
     } catch (NumberFormatException e) {
       this.waitersTimeout = 10; // значение по умолчанию
     }

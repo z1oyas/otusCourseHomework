@@ -138,17 +138,18 @@
                         <!--suppress UnresolvedMavenProperty -->
                         <browser>${browser}</browser>
                         <!--suppress UnresolvedMavenProperty -->
-                        <base.url>${base.url}</base.url>
+                        <base_url>${base_url}</base_url>
                         <!--suppress UnresolvedMavenProperty -->
                         <remote>${remote}</remote>
                         <!--suppress UnresolvedMavenProperty -->
-                        <selenoid.url>${selenoid.url}</selenoid.url>
+                        <selenoid_url>${selenoid_url}</selenoid_url>
                         <!--suppress UnresolvedMavenProperty -->
-                        <browser.version>${browser.version}</browser.version>
+                        <browser_version>${browser_version}</browser_version>
                         <!--suppress UnresolvedMavenProperty -->
-                        <enable.video>${enable.video}</enable.video>
+                        <enable_video>${enable_video}</enable_video>
                         <!--suppress UnresolvedMavenProperty -->
-                        <enable.vnc>${enable.vnc}</enable.vnc>
+                        <enable_vnc>${enable_vnc}</enable_vnc>
+                        <allure.results.directory>${project.basedir}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                     <includes>
                         <include>**/*Test.java</include>
@@ -162,6 +163,7 @@
                 <version>2.14.0</version>
                 <configuration>
                     <reportVersion>${allure.version}</reportVersion>
+                    <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
             <plugin>

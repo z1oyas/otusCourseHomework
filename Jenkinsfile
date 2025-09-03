@@ -1,6 +1,6 @@
 import groovy.json.JsonSlurperClassic
 
-def testsStatistics = [:]
+def slurped = [:]
 
 timeout(1200){
     node("maven") {
@@ -8,20 +8,16 @@ timeout(1200){
             sh "mkdir -p envs"
 
             def yamlConfig = readYaml text: params.YAML_CONFIG
-            def chatId = params.chat_id
-            def botToken = params.bot_token
 
             stage("Create environment variables") {
                 dir("envs") {
                    sh "echo 'BROWSER=${yamlConfig['browser']}' > .env"
-                   sh "echo 'BASE_URL=${yamlConfig['base.url']}' >> .env"
+                   sh "echo 'BASE_URL=${yamlConfig['base_url']}' >> .env"
                    sh "echo 'REMOTE=${yamlConfig['remote']}' >> .env"
-                   sh "echo 'BROWSER_VERSION=${yamlConfig['browser.version']}' >> .env"
-                   sh "echo 'ENABLE_VIDEO=${yamlConfig['enable.video']}' >> .env"
-                   sh "echo 'ENABLE_VNC=${yamlConfig['enable.vnc']}' >> .env"
-                   sh "echo 'SELENOID_URL=${yamlConfig['selenoid.url']}' >> .env"
-                   sh "echo 'CHAT_ID=${chatId}' >> .env"
-                   sh "echo 'BOT_TOKEN=${botToken}' >> .env"
+                   sh "echo 'BROWSER_VERSION=${yamlConfig['browser_version']}' >> .env"
+                   sh "echo 'ENABLE_VIDEO=${yamlConfig['enable_video']}' >> .env"
+                   sh "echo 'ENABLE_VNC=${yamlConfig['enable_vnc']}' >> .env"
+                   sh "echo 'SELENOID_URL=${yamlConfig['selenoid_url']}' >> .env"
                 }
             }
             stage("Prepare Allure results") {
@@ -53,35 +49,34 @@ timeout(1200){
             }
 
             stage("Gets statistics from allure artifacts") {
-                def jsonLines = readFile ".allure-report/widgets/summary.json"
-                def slurped = new JsonSlurperClassic().parseText(jsonLines)
+                def jsonLines = readFile "allure-report/widgets/summary.json"
+                slurped = new JsonSlurperClassic().parseText(jsonLines)
 
-                slurped.each{k, v ->
-                    testsStatistics[k] =v
-                }
-
+                sh "echo $slurped"
             }
-
 
             stage("Telegram notification") {
             def BROWSER = yamlConfig['browser']
             def REMOTE = yamlConfig['remote']
             def BROWSER_VERSION = yamlConfig['browser.version']
-                def message = """=============UI TESTS RESULT ================
+                def message = """==== UI TESTS RESULT ====
                 browser name: $BROWSER
                 remote: $REMOTE
                 browser version: $BROWSER_VERSION
-                """
+                Test Results:
+                Passed: ${slurped.statistic.passed}
+                Failed: ${slurped.statistic.failed}
+                Broken: ${slurped.statistic.broken}
+                Skipped: ${slurped.statistic.skipped}
+                Total: ${slurped.statistic.total}
+                Duration: ${slurped.time.duration}"""
 
-                testsStatistics.each{k,v ->
-                    message += "\t\t$k: $v\n"
-                }
                 withCredentials([string(credentialsId: 'chat_id', variable: 'chatId'), string(credentialsId: 'bot_token',variable: 'botToken')]){
                     sh """
                     curl -X POST \
                     -H 'Content-Type: application/json' \
-                    -d '{"chat_id": "$chatId", "text": "$message"}' \
-                    "https://api.telegram.org/bot$botToken/sendMessage"
+                    -d '{"chat_id": "${chatId}", "text": "${messageContent}"}' \
+                    "https://api.telegram.org/bot${botToken}/sendMessage"
                     """
                 }
             }

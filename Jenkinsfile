@@ -7,6 +7,17 @@ def slurped = [:]
 timeout(1200){
     node("maven") {
         try {
+
+            stage("Checkout") {
+                checkout scm
+            }
+
+            stage("Build & Push Docker image") {
+                sh """
+                docker build -f Dockerfile.mobile -t localhost:5005/mobile_tests:latest .
+                docker push localhost:5005/mobile_tests:latest
+                """
+            }
             sh "mkdir -p envs"
 
             def yamlConfig = readYaml text: params.YAML_CONFIG

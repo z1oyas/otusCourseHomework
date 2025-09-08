@@ -5,8 +5,8 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY pom.xml ./
-COPY src ./src
 RUN mvn dependency:go-offline
+COPY src ./src
 
 ENV ALLURE_RESULTS=/app/allure-results
 

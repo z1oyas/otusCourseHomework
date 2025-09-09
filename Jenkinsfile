@@ -14,7 +14,7 @@ timeout(1200){
 
             stage("Build & Push Docker image") {
                 sh """
-                docker build -f Dockerfile.mobile -t localhost:5005/ui_tests:latest .
+                docker build -f Dockerfile.uitests -t localhost:5005/ui_tests:latest .
                 docker push localhost:5005/ui_tests:latest
                 """
             }

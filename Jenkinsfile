@@ -45,11 +45,6 @@ timeout(1200){
                     currentBuild.result = 'UNSTABLE'
                 }
             }
-//
-//             stage("Debug allure mount") {
-//                 sh "ls -la /home/jenkins/workspace/ui-test-runner/allure-results || true"
-//                 sh "ls -la allure-results || true"
-//             }
 
             stage("Allure report publisher") {
                 allure([
@@ -83,7 +78,7 @@ timeout(1200){
 
                 def cleanDateStart = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStart)
                 def cleanDateStop = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss').format(dateObjStop)
-//
+
                 def durationMin = (duration /60) as long
                 def durationSec = (duration %60) as long
 
@@ -112,6 +107,9 @@ timeout(1200){
                     "https://api.telegram.org/bot${botToken}/sendMessage"
                     """
                 }
+            }
+            stage("Archive allure results") {
+                archiveArtifacts artifacts: 'allure-results/**', allowEmptyArchive: true
             }
         }
         finally {
